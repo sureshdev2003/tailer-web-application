@@ -1,46 +1,30 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
+import React, { useState } from "react";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./Navbar.css";
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  const links = ["Home", "Services", "Gallery", "About", "Contact"];
   return (
-    <div>
-      <header className="navbar">
-        <motion.div
-          className="logo"
-          initial={{ x: -50, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          TailorCraft
-        </motion.div>
+    <header className="navbar">
+      <div className="logo">TailorCraft</div>
 
-        <nav className={`nav-links ${isOpen ? "open" : ""}`}>
-          {links.map((link, index) => (
-            <motion.a
-              key={link}
-              href={`#${link.toLowerCase()}`}
-              className="nav-link"
-              initial={{ y: -20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: index * 0.1 }}
-              onClick={() => setIsOpen(false)}
-            >
-              {link}
-            </motion.a>
-          ))}
-        </nav>
+      <nav className={`nav-links ${menuOpen ? "open" : ""}`}>
+        <a href="#home" onClick={() => setMenuOpen(false)}>Home</a>
+        <a href="#services" onClick={() => setMenuOpen(false)}>Services</a>
+        <a href="#gallery" onClick={() => setMenuOpen(false)}>Gallery</a>
+        <a href="#about" onClick={() => setMenuOpen(false)}>About</a>
+        <a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a>
+      </nav>
 
-        <div className="menu-icon" onClick={() => setIsOpen(!isOpen)}>
-          <div className={`bar ${isOpen ? "rotate1" : ""}`}></div>
-          <div className={`bar ${isOpen ? "fade" : ""}`}></div>
-          <div className={`bar ${isOpen ? "rotate2" : ""}`}></div>
+      <div className="nav-actions">
+        <i className="fas fa-shopping-cart cart-icon"></i>
+        <button className="login-btn">Login</button>
+        <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+          <i className={`fas ${menuOpen ? "fa-times" : "fa-bars"}`}></i>
         </div>
-      </header>
-    </div>
+      </div>
+    </header>
   );
 };
 
